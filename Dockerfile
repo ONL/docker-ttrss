@@ -25,8 +25,8 @@ RUN echo "sendmail_path=sendmail -t" > /usr/local/etc/php/conf.d/php-sendmail.in
 RUN mkdir -p /etc/apache2/site-config \
     && mkdir -p /etc/apache2/saml
 
-ADD configs/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
-ADD configs/mellon.conf /etc/apache2/site-config/mellon.conf
+ADD config/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+ADD config/mellon.conf /etc/apache2/site-config/mellon.conf
 
 RUN sed -i "/^<\/V/i Include site-config/mellon.conf" /etc/apache2/sites-available/000-default.conf \
     && sed -i "s/ServerAdmin webmaster/#ServerAdmin webmaster/" /etc/apache2/sites-available/000-default.conf
