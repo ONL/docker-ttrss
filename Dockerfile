@@ -15,11 +15,11 @@ RUN apt-get update && apt-get install -y \
 		libxmlsec1-openssl \
 		libxslt1.1 \
 		libicu-dev \
-		libcurl4-gnutls-dev \
+		libpng-dev \
 		ssmtp \
 	--no-install-recommends && rm -r /var/lib/apt/lists/*
 
-RUN docker-php-ext-install opcache intl json gd pgsql xml
+RUN docker-php-ext-install opcache intl gd pgsql xml
 RUN a2enmod auth_mellon
 
 RUN echo "sendmail_path=sendmail -t" > /usr/local/etc/php/conf.d/php-sendmail.ini
