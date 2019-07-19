@@ -38,6 +38,12 @@ RUN chmod +x /opt/mellon_create_metadata.sh \
 
 WORKDIR /var/www/html
 
+RUN curl -o ttrss.tar.gz https://git.tt-rss.org/fox/tt-rss/archive/19.2.tar.gz \
+	&& tar --strip-components=1 -xzf ttrss.tar.gz \\
+	&& rm -f ttrss.tar.gz \\
+	&& rm -rf install \\
+	&& rm -rf config.php-dist
+
 VOLUME /etc/apache2/site-config
 VOLUME /etc/apache2/saml
 VOLUME /etc/ssmtp
