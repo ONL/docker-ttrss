@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
 		libxmlsec1-openssl \
 		libxslt1.1 \
 		libicu-dev \
+		libcurl4-gnutls-dev \
 		ssmtp \
 	--no-install-recommends && rm -r /var/lib/apt/lists/*
 
