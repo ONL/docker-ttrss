@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 		ssmtp \
 	--no-install-recommends && rm -r /var/lib/apt/lists/*
 
-RUN docker-php-ext-install opcache intl json curl gd pgsql xml
+RUN docker-php-ext-install opcache intl json gd pgsql xml
 RUN a2enmod auth_mellon
 
 RUN echo "sendmail_path=sendmail -t" > /usr/local/etc/php/conf.d/php-sendmail.ini
