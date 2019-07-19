@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 		ssmtp \
 	--no-install-recommends && rm -r /var/lib/apt/lists/*
 
-RUN docker-php-ext-install opcache intl json curl mbstring gd pgsql xml
+RUN docker-php-ext-install opcache intl json curl gd pgsql xml
 RUN a2enmod auth_mellon
 
 RUN echo "sendmail_path=sendmail -t" > /usr/local/etc/php/conf.d/php-sendmail.ini
@@ -43,7 +43,6 @@ WORKDIR /var/www/html
 RUN curl -o ttrss.tar.gz https://git.tt-rss.org/fox/tt-rss/archive/19.2.tar.gz \
 	&& tar --strip-components=1 -xzf ttrss.tar.gz \
 	&& rm -f ttrss.tar.gz \
-	&& rm -rf install \
 	&& rm -rf config.php-dist \
 	&& chown -R www-data:www-data
 
