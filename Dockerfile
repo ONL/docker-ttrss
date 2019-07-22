@@ -17,12 +17,16 @@ RUN apt-get update && apt-get install -y \
 		libicu-dev \
 		libpng-dev \
 		libpq-dev \
+		libldap2-dev \
 		ssmtp \
 	--no-install-recommends && rm -r /var/lib/apt/lists/*
 
 RUN docker-php-ext-install opcache intl gd pgsql xml
 RUN docker-php-ext-enable opcache intl json curl mbstring gd pgsql xml
-RUN a2enmod auth_mellon
+
+RUN a2enmod auth_mellon \
+	&& a2enmod ldap \
+	&& a2enmod authnz_ldap
 
 RUN echo "sendmail_path=sendmail -t" > /usr/local/etc/php/conf.d/php-sendmail.ini
 
@@ -31,9 +35,17 @@ RUN mkdir -p /etc/apache2/site-config \
 
 ADD config/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 ADD config/mellon.conf /etc/apache2/site-config/mellon.conf
+ADD config/ldap.conf /etc/apache2/site-config/ldap.conf
 
 RUN sed -i "/^<\/V/i Include site-config/mellon.conf" /etc/apache2/sites-available/000-default.conf \
     && sed -i "s/ServerAdmin webmaster/#ServerAdmin webmaster/" /etc/apache2/sites-available/000-default.conf
+
+RUN sed -i "/^<\/V/i Include site-config/ldap.conf" /etc/apache2/sites-available/000-default.conf \
+    && sed -i '1s/^/LDAPSharedCacheSize 2500000\n/' /etc/apache2/sites-available/000-default.conf \
+    && sed -i '1s/^/LDAPCacheEntries 1024\n/' /etc/apache2/sites-available/000-default.conf \
+    && sed -i '1s/^/LDAPCacheTTL 600\n/' /etc/apache2/sites-available/000-default.conf \
+    && sed -i '1s/^/LDAPOpCacheEntries 1024\n/' /etc/apache2/sites-available/000-default.conf \
+    && sed -i '1s/^/LDAPOpCacheTTL 600\n/' /etc/apache2/sites-available/000-default.conf
 
 ADD config/mellon_create_metadata.sh /opt/mellon_create_metadata.sh
 ADD config/firstrun.sh /opt/firstrun.sh
