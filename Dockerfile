@@ -36,15 +36,7 @@ ADD config/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 ADD config/mellon.conf /etc/apache2/site-config/mellon.conf
 ADD config/ldap.conf /etc/apache2/site-config/ldap.conf
 
-RUN sed -i "/^<\/V/i Include site-config/mellon.conf" /etc/apache2/sites-available/000-default.conf \
-    && sed -i "s/ServerAdmin webmaster/#ServerAdmin webmaster/" /etc/apache2/sites-available/000-default.conf
-
-RUN sed -i "/^<\/V/i Include site-config/ldap.conf" /etc/apache2/sites-available/000-default.conf \
-    && sed -i '1s/^/LDAPSharedCacheSize 2500000\n/' /etc/apache2/sites-available/000-default.conf \
-    && sed -i '1s/^/LDAPCacheEntries 1024\n/' /etc/apache2/sites-available/000-default.conf \
-    && sed -i '1s/^/LDAPCacheTTL 600\n/' /etc/apache2/sites-available/000-default.conf \
-    && sed -i '1s/^/LDAPOpCacheEntries 1024\n/' /etc/apache2/sites-available/000-default.conf \
-    && sed -i '1s/^/LDAPOpCacheTTL 600\n/' /etc/apache2/sites-available/000-default.conf
+ADD config/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 ADD config/mellon_create_metadata.sh /opt/mellon_create_metadata.sh
 ADD config/firstrun.sh /opt/firstrun.sh
