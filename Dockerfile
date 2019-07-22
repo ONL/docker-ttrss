@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y \
 		libapache2-mod-auth-mellon \
 		liblasso3 \
 		libxmlsec1 \
-		libxml2 \
 		libxmlsec1-openssl \
 		libxslt1.1 \
 		libicu-dev \
@@ -22,7 +21,7 @@ RUN apt-get update && apt-get install -y \
 		ssmtp \
 	--no-install-recommends && rm -r /var/lib/apt/lists/*
 
-RUN docker-php-ext-install opcache intl gd pgsql xml
+RUN docker-php-ext-install opcache intl gd pgsql
 RUN docker-php-ext-enable opcache intl json curl mbstring gd pgsql xml
 
 RUN a2enmod auth_mellon \
