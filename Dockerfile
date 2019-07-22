@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
 		libapache2-mod-auth-mellon \
 		liblasso3 \
 		libxmlsec1 \
+		libxml2 \
 		libxmlsec1-openssl \
 		libxslt1.1 \
 		libicu-dev \
