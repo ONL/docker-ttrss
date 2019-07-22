@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
 		libxslt1.1 \
 		libicu-dev \
 		libpng-dev \
+		libpq-dev \
 		ssmtp \
 	--no-install-recommends && rm -r /var/lib/apt/lists/*
 
