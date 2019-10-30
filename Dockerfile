@@ -48,7 +48,6 @@ WORKDIR /var/www/html
 RUN curl -o ttrss.tar.gz https://git.tt-rss.org/fox/tt-rss/archive/19.2.tar.gz \
 	&& tar --strip-components=1 -xzf ttrss.tar.gz \
 	&& rm -f ttrss.tar.gz \
-	&& rm -rf config.php-dist \
 	&& chown -R www-data:www-data /var/www/html
 
 VOLUME /etc/apache2/site-config
