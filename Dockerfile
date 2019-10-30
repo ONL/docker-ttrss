@@ -20,8 +20,8 @@ RUN apt-get update && apt-get install -y \
 		ssmtp \
 	--no-install-recommends && rm -r /var/lib/apt/lists/*
 
-RUN docker-php-ext-install opcache intl gd pgsql
-RUN docker-php-ext-enable opcache intl gd pgsql
+RUN docker-php-ext-install opcache intl gd pgsql pdo pdo_pgsql
+RUN docker-php-ext-enable opcache intl gd pgsql pdo pdo_pgsql
 
 RUN a2enmod auth_mellon \
 	&& a2enmod ldap \
