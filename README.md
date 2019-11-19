@@ -6,6 +6,7 @@ The main goal is to use TinyTinyRSS with remote authentication. This image thus 
 - mod_mellon: SAML-based authentication
 - mod_authnz_ldap: LDAP-based authentication
 - ssmtp: To send e-mails from TinyTinyRSS
+- Hardened Apache Config (ServerTokens, ServerSignature, Indexes disabled)
 
 ## How to configure
 The relevant configuration files have to be mounted to `/etc/apache2/site-config` inside the container.
