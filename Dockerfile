@@ -45,7 +45,7 @@ RUN chmod +x /opt/mellon_create_metadata.sh \
 
 WORKDIR /var/www/html
 
-RUN curl -o ttrss.tar.gz https://git.tt-rss.org/fox/tt-rss/archive/19.8.tar.gz \
+RUN curl -o ttrss.tar.gz https://git.tt-rss.org/fox/tt-rss/archive/1.15.3.tar.gz \
 	&& tar --strip-components=1 -xzf ttrss.tar.gz \
 	&& rm -f ttrss.tar.gz \
 	&& chown -R www-data:www-data /var/www/html
